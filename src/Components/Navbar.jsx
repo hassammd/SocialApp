@@ -3,12 +3,12 @@ import { faCartPlus, faHouse, faPeopleGroup, faUserGroup } from "@fortawesome/fr
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from "react-router-dom"
 
-const Menu = () => {
+const Navbar = () => {
     return (
         <>
 
             <ul className="flex flex-col justify-left items-start gap-2 color-red-100">
-                <li><Link><span><FontAwesomeIcon icon={faHouse} /></span> Home</Link></li>
+                <li><Link to={'home'}><span><FontAwesomeIcon icon={faHouse} /></span> Home</Link></li>
                 <li><Link><FontAwesomeIcon icon={faUserGroup} />Friends</Link></li>
                 <li><Link><FontAwesomeIcon icon={faPeopleGroup} />Groups</Link></li>
                 <li><Link><FontAwesomeIcon icon={faCartPlus} />Marketplace</Link></li>
@@ -20,4 +20,4 @@ const Menu = () => {
     )
 }
 
-export default Menu
+export default Navbar

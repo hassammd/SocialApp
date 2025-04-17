@@ -1,5 +1,5 @@
 import AddPost from "../Components/AddPost"
-import Menu from "../Components/Menu"
+import Menu from "../Components/Navbar"
 
 const Home = () => {
     return (
