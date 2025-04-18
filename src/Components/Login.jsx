@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ onAuthMod }) => {
 
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
@@ -96,6 +96,10 @@ const Login = () => {
                     >
                         LOGIN
                     </button>
+                </div>
+
+                <div className="w-full">
+                    <span onClick={() => navigate('/signup')} className="w-100 cursor-pointer">SIGN UP</span>
                 </div>
             </form>
         </div>
