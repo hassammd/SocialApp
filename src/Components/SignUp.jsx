@@ -141,7 +141,7 @@ const SignUp = () => {
 
 
                     <div className="w-full">
-                        <span className="w-100 cursor-pointer">LOGIN</span>
+                        <span className="w-100 cursor-pointer" onClick={() => navigate('/')}>LOGIN</span>
                     </div>
                 </form>
 

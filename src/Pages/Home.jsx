@@ -1,7 +1,9 @@
+
 import AddPost from "../Components/AddPost"
 import Menu from "../Components/Navbar"
 
 const Home = () => {
+
     return (
         <>
             <main className="bg-blue-50 pt-5">
