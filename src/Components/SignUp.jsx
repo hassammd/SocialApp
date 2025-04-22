@@ -2,7 +2,9 @@ import { faEnvelope, faUser } from "@fortawesome/free-regular-svg-icons"
 import { faLock } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
-import { data } from "react-router-dom"
+import { data, useNavigate } from "react-router-dom"
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { auth } from "../firebase"
 
 const SignUp = () => {
 
@@ -11,6 +13,7 @@ const SignUp = () => {
     const [Password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [signUpError, setSignUpError] = useState({})
+    const navigate = useNavigate()
 
 
 
@@ -41,7 +44,7 @@ const SignUp = () => {
 
 
 
-    const SignUpHander = (e) => {
+    const SignUpHander = async (e) => {
         e.preventDefault()
 
         const userData = { name, email, Password, confirmPassword }
@@ -72,11 +75,25 @@ const SignUp = () => {
                 }
             } if (Object.entries(error).length > 0) {
                 setSignUpError(error)
-            } if (Object.entries(error).length == 0) {
-                setSignUpError('')
             }
         })
+        if (Object.entries(error).length == 0) {
+            console.log('Form submited')
+            setSignUpError('')
+            setEmail('')
+            setName('')
+            setPassword('')
+            setConfirmPassword('')
 
+            try {
+
+                const user = await createUserWithEmailAndPassword(auth, email, Password)
+                navigate('/')
+            } catch (err) {
+                alert(err.message)
+            }
+
+        }
 
 
 
@@ -101,7 +118,7 @@ const SignUp = () => {
                     </div>
                     <div className="flex flex-col  gap-2 items-start relative w-full">
                         <label className="text-sm font-medium" htmlFor="">Email</label>
-                        <input onChange={(e) => setEmail(e.target.value)} className="w-full pl-8 border-b border-gray-300 text-sm py-2 focus:outline-none" type="text" placeholder="Email" value={email} />
+                        <input onChange={(e) => setEmail(e.target.value)} className="w-full pl-8 border-b border-gray-300 text-sm py-2 focus:outline-none" type="email" placeholder="Email" value={email} />
                         <FontAwesomeIcon className="text-gray-400 absolute bottom-3 left-2 w-4" icon={faEnvelope} />
                         <span className="absolute top-17 text-xs text-red-500">{signUpError.email}</span>
                     </div>
