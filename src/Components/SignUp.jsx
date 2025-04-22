@@ -27,7 +27,9 @@ const SignUp = () => {
         { minlength: 8, message: "password must be atleast 8 characters" }
         ],
 
+
         confirmPassword: [{ required: true, message: 'Enter confirmed password' }]
+
 
 
 
@@ -63,6 +65,10 @@ const SignUp = () => {
                     if (rule.passwordPattern && value && !rule.passwordPattern.test(value)) {
                         error[key] = rule.message
                     }
+                }
+
+                if (Password && confirmPassword && Password !== confirmPassword) {
+                    error.confirmPassword = "Passwords do not match";
                 }
             } if (Object.entries(error).length > 0) {
                 setSignUpError(error)
@@ -108,7 +114,7 @@ const SignUp = () => {
                     <div className="flex flex-col  gap-2 items-start relative w-full">
                         <label className="text-sm font-medium" htmlFor="">Confirm Password</label>
                         <FontAwesomeIcon className="text-gray-400 absolute bottom-3 left-2 w-4" icon={faLock} />
-                        <input onChange={(e) => setConfirmPassword(e.target.value)} className="w-full pl-8 border-b border-gray-300 text-sm py-2 focus:outline-none" type="password" placeholder="Confirm Password" />
+                        <input onChange={(e) => setConfirmPassword(e.target.value)} className="w-full pl-8 border-b border-gray-300 text-sm py-2 focus:outline-none" type="password" placeholder="Confirm Password" value={confirmPassword} />
                         <span className="absolute top-17 text-xs text-red-500">{signUpError.confirmPassword}</span>
 
                     </div>
