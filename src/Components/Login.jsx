@@ -4,7 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from '../firebase'
-import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth"
+import { signInWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
+import { faFacebookF, faGoogle, faXTwitter } from "@fortawesome/free-brands-svg-icons";
 
 const Login = () => {
 
@@ -14,11 +15,8 @@ const Login = () => {
     const [firebaseLoginErr, setFirebaseLoginErr] = useState('')
     const [isLogedIn, setIsLogedIn] = useState(false)
 
-
-    console.log(loginError)
-
     const navigate = useNavigate()
-
+    const googleProvider = new GoogleAuthProvider()
 
     //error handling
 
@@ -43,6 +41,19 @@ const Login = () => {
 
         })
     }, [])
+
+    //login with google
+
+    const singInWithGoogle = () => {
+
+        signInWithPopup(auth, googleProvider).then((res) => {
+            console.log(res)
+        }).catch((err) => console.log(err))
+    }
+
+
+    //login with google
+
 
 
 
@@ -161,6 +172,15 @@ const Login = () => {
                         >
                             LOGIN
                         </button>
+                    </div>
+                    <div className="flex flex-col items-center gap-2">
+                        <p className="text-center w-100">or sign in using</p>
+                        <ul className="flex gap-2">
+                            <li className="cursor-pointer bg-blue-500 text-white w-10 h-10 p-2 rounded-full flex items-center justify-center"><FontAwesomeIcon icon={faFacebookF} /></li>
+                            <li className="cursor-pointer bg-black text-white w-10 h-10 p-2 rounded-full flex items-center justify-center"><FontAwesomeIcon icon={faXTwitter} /></li>
+                            <li onClick={singInWithGoogle} className="cursor-pointer bg-red-400 text-white w-10 h-10 p-2 rounded-full flex items-center justify-center"><FontAwesomeIcon icon={faGoogle} /></li>
+                        </ul>
+
                     </div>
 
                     <div className="w-full">
