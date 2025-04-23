@@ -173,8 +173,8 @@ const Login = () => {
                             LOGIN
                         </button>
                     </div>
-                    <div className="flex flex-col items-center gap-2">
-                        <p className="text-center w-100">or sign in using</p>
+                    <div className="flex flex-col items-center gap-4">
+                        <p className="text-center w-100 text-gray-600 text-sm">Or Sign Up Using</p>
                         <ul className="flex gap-2">
                             <li className="cursor-pointer bg-blue-500 text-white w-10 h-10 p-2 rounded-full flex items-center justify-center"><FontAwesomeIcon icon={faFacebookF} /></li>
                             <li className="cursor-pointer bg-black text-white w-10 h-10 p-2 rounded-full flex items-center justify-center"><FontAwesomeIcon icon={faXTwitter} /></li>

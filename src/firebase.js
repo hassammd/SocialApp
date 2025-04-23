@@ -8,6 +8,7 @@ import { getAuth } from "firebase/auth";
 const firebaseConfig = {
   apiKey: "AIzaSyAWQnWxStGuag5G03HgbftyOGpumTPDFJc",
   authDomain: "socialapp-d493c.firebaseapp.com",
+  databaseURL: "https://socialapp-d493c-default-rtdb.firebaseio.com",
   projectId: "socialapp-d493c",
   storageBucket: "socialapp-d493c.firebasestorage.app",
   messagingSenderId: "173036120506",

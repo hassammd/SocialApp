@@ -2,8 +2,9 @@ import { faEnvelope, faUser } from "@fortawesome/free-regular-svg-icons"
 import { faLock } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
-import { data, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { getDatabase, ref, set } from 'firebase/database'
 import { auth } from "../firebase"
 
 const SignUp = () => {
@@ -14,6 +15,7 @@ const SignUp = () => {
     const [confirmPassword, setConfirmPassword] = useState('')
     const [signUpError, setSignUpError] = useState({})
     const navigate = useNavigate()
+
 
 
 
@@ -87,8 +89,22 @@ const SignUp = () => {
 
             try {
 
-                const user = await createUserWithEmailAndPassword(auth, email, Password)
+                const response = await createUserWithEmailAndPassword(auth, email, Password)
+
+                console.log(response.user.uid)
+
+                //save the data to database
+                const db = getDatabase()
+                set(ref(db, "users/" + response.user.uid), {
+                    name: name,
+                    bio: 'A rendom user from rendom place',
+                    followers: 0,
+                    following: 0
+                })
+                //save the data to database
+
                 navigate('/')
+
             } catch (err) {
                 alert(err.message)
             }

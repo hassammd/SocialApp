@@ -1,6 +1,42 @@
+import { useEffect, useState } from "react"
 import AddPost from "./AddPost"
+import { getDatabase, ref, onValue, get } from "firebase/database"
+import { onAuthStateChanged } from "firebase/auth"
+import { auth } from "../firebase"
+
+
 
 const Profile = () => {
+
+    const [profileData, setProfileData] = useState({})
+    console.log(profileData)
+
+
+    useEffect(() => {
+
+        const user = auth.currentUser
+
+        if (user) {
+            const db = getDatabase()
+            const useRef = ref(db, 'users/' + user.uid)
+            onValue(useRef, (userData) => {
+                const data = userData.val()
+                setProfileData(data)
+            })
+        }
+    }, [])
+
+    // useEffect(() => {
+
+
+
+
+
+    // })
+
+
+
+
     return (
 
         <>
@@ -13,7 +49,7 @@ const Profile = () => {
                         <span>Image</span>
                     </div>
                     <div>
-                        <h2>Profile Name</h2>
+                        <h2>{profileData.name}</h2>
                         <span>@username</span>
                     </div>
 
