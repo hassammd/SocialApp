@@ -11,7 +11,7 @@ const Header = () => {
                     <div className="cursor-pointer" onClick={() => navigate('/home')}>LOGO</div>
                 </div>
                 <div className="w-150">
-                    <input className="w-150 bg-gray-100 pl-3 pr-3 pt-1 pb-1" type="text" name="" id="" placeholder="Search.." />
+                    <input className="w-full bg-gray-100 pl-3 pr-3 pt-1 pb-1" type="text" name="" id="" placeholder="Search.." />
                 </div>
                 <div>
                     <span className="cursor-pointer" onClick={() => navigate('/profile')}>Profile</span>
