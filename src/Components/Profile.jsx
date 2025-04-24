@@ -28,7 +28,7 @@ const Profile = () => {
 
         } catch (err) {
 
-            console.log('upload failed' + err)
+            console.log("Upload failed:", err.code || err.message || err);
         }
 
     }
