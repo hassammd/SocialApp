@@ -10,11 +10,11 @@ const Profile = () => {
 
 
     const profileImageUploadHandler = async (file) => {
-
+        if (!file) return;
         try {
-            const storege = getStorage()
+            const storage = getStorage()
             //set image reference
-            const imageRef = filestoregeRef(storege, `profileImages/${auth.currentUser.uid}`)
+            const imageRef = filestoregeRef(storage, `profileImages/${auth.currentUser.uid}`)
             //uploading image
             await uploadBytes(imageRef, file)
             //download image url
@@ -77,12 +77,12 @@ const Profile = () => {
                     <h2>User Profile</h2>
 
                 </div>
-                <div className="flex flex-col items-start pl-20 -mt-16 relative">
-                    <input onChange={(e) => profileImageUploadHandler(e.target.files[0])} type="file" accept="image/*" />
+                <div className="flex flex-col items-start pl-20 -mt-16 mb-15 pb-10 relative">
                     <div className="border border-gray-300 rounded-full bg-gray-100 h-30 w-30  flex justify-center items-center">
                         <span><img src={profileData.imageUrl} alt="" /></span>
                         {/* <button type="file"></button> */}
                     </div>
+                    <input onChange={(e) => profileImageUploadHandler(e.target.files[0])} type="file" accept="image/*" />
 
                     <div className="flex flex-col items-start">
                         <h2 className="font-bold">{profileData.name}</h2>
@@ -108,6 +108,7 @@ const Profile = () => {
 
                 </div>
             </div>
+            <div className="w-2/5 m-auto rounded-sm"><AddPost /></div>
 
 
 

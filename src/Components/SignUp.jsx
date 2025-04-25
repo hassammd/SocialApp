@@ -99,7 +99,8 @@ const SignUp = () => {
                     name: name,
                     bio: 'A rendom user from rendom place',
                     followers: 0,
-                    following: 0
+                    following: 0,
+                    tweets: {}
                 })
                 //save the data to database
 
