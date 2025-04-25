@@ -2,7 +2,8 @@ import { faUser } from "@fortawesome/free-regular-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import PostComponent from "./PostComponent"
-
+import { auth } from "../firebase"
+import { set, ref, getDatabase, push } from 'firebase/database'
 const AddPost = () => {
 
     const [postsTitle, setPostsTitle] = useState("")
@@ -21,9 +22,13 @@ const AddPost = () => {
 
     ])
 
+    //save post to the database
 
 
-    const postHandler = (e) => {
+    //save post to the database
+
+
+    const postHandler = async (e) => {
         e.preventDefault()
         const err = {}
         if (postsTitle.trim() === '') {
@@ -33,13 +38,27 @@ const AddPost = () => {
         } if (err) {
             setPostValidation(err)
         } else {
-            setPostValidation()
+            setPostValidation({})
         } if (Object.entries(err).length == 0) {
 
 
             setPost([{ title: postsTitle, description: postDescription }, ...post])
             setPostsTitle("");
             setPostDescription("");
+            //save posts in database
+            try {
+                const db = getDatabase()
+                const postRef = ref(db, `users/${auth.currentUser.uid}/posts`)
+                await push(postRef, {
+                    postTitle: postsTitle,
+                    likes: 0,
+                    comments: [""],
+                    postData: Date.now()
+                })
+            } catch (err) {
+                console.log(err)
+
+            }
         }
 
     }
