@@ -1,32 +1,48 @@
 import { faUser } from "@fortawesome/free-regular-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import PostComponent from "./PostComponent"
 import { auth } from "../firebase"
-import { set, ref, getDatabase, push } from 'firebase/database'
+import { ref, getDatabase, push, onValue } from 'firebase/database'
+// import { ref as postRef, getDatabase as postDatabse, value } from "firebase/database"
 const AddPost = () => {
 
     const [postsTitle, setPostsTitle] = useState("")
     const [postDescription, setPostDescription] = useState('')
     const [postValidation, setPostValidation] = useState({})
-    console.log(postValidation)
-    const [post, setPost] = useState([
-        {
-            title: 'Post Title',
-            description: 'Post Description'
-        },
-        {
-            title: 'Second Post',
-            description: "Second Post Description"
-        }
-
-    ])
-
-    //save post to the database
+    const [postData, setPostData] = useState([])
+    console.log("this is post data", postData)
 
 
-    //save post to the database
+    //read posts data from realtime database
 
+    useEffect(() => {
+
+
+        const postDb = getDatabase()
+        const postRef = ref(postDb, `users/${auth.currentUser.uid}/posts`)
+        onValue(postRef, (snapshot) => {
+            const data = snapshot.val()
+
+            if (data) {
+                const postArray = Object.entries(data).map(([key, value]) => ({
+
+                    id: key,
+                    title: value.postTitle,
+                    description: value.postDescription,
+                    liks: value.postDescription,
+                    postData: value.postDate
+                }))
+
+                postArray.sort((a, b) => b.postData - a.postData)
+                setPostData(postArray)
+            }
+        })
+    }, [])
+
+
+
+    //read posts data from realtime database
 
     const postHandler = async (e) => {
         e.preventDefault()
@@ -42,7 +58,7 @@ const AddPost = () => {
         } if (Object.entries(err).length == 0) {
 
 
-            setPost([{ title: postsTitle, description: postDescription }, ...post])
+            // setPost([{ title: postsTitle, description: postDescription }, ...post])
             setPostsTitle("");
             setPostDescription("");
             //save posts in database
@@ -51,9 +67,10 @@ const AddPost = () => {
                 const postRef = ref(db, `users/${auth.currentUser.uid}/posts`)
                 await push(postRef, {
                     postTitle: postsTitle,
+                    postDescription: postDescription,
                     likes: 0,
                     comments: [""],
-                    postData: Date.now()
+                    postDate: Date.now()
                 })
             } catch (err) {
                 console.log(err)
@@ -66,7 +83,7 @@ const AddPost = () => {
     return (
 
         <>
-            <div className="rounded-lg bg-white flex flex-col gap-4 justify-center p-10 pt-10 pb-10">
+            <div className="md:w-full rounded-lg bg-white flex flex-col gap-4 justify-center p-10 pt-10 pb-10">
                 <form className="flex flex-col gap-4" action="" onSubmit={postHandler}>
 
                     <div className=" flex justify-left gap-3 ">
@@ -91,8 +108,9 @@ const AddPost = () => {
 
             </div>
             {
-                post.map((items) => {
-                    return <PostComponent title={items.title} description={items.description} />
+                postData.map((items) => {
+                    console.log('this is vlue', items)
+                    return <PostComponent key={items.id} title={items.title} description={items.description} />
                 })
             }
 

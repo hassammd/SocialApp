@@ -108,7 +108,7 @@ const Profile = () => {
 
                 </div>
             </div>
-            <div className="w-2/5 m-auto rounded-sm"><AddPost /></div>
+            <div className="w-2/5 sm:w-full m-auto rounded-sm"><AddPost /></div>
 
 
 

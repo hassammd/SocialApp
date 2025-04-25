@@ -8,7 +8,7 @@ const Home = () => {
         <>
             <main className="bg-blue-50 pt-5">
                 <div className="grid grid-cols-3">
-                    <div className="flex items-center justify-center"><Menu /></div>
+                    <div className="flex items-start justify-center sticky top-0"><Menu /></div>
                     <div><AddPost /></div>
                     <div></div>
                 </div>
