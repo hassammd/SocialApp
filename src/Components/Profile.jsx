@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import AddPost from "./AddPost"
+import AddPost from "./AddPosts"
 import { getDatabase, ref, onValue, get, set, update } from "firebase/database"
 import { auth } from "../firebase"
 import { getStorage, ref as filestoregeRef, uploadBytes, getDownloadURL } from "firebase/storage"
@@ -80,7 +80,7 @@ const Profile = () => {
                 <div className="flex flex-col items-start pl-20 -mt-16 mb-15 pb-10 relative">
                     <div className="border border-gray-300 rounded-full bg-gray-100 h-30 w-30  flex justify-center items-center">
                         <span><img src={profileData.imageUrl} alt="" /></span>
-                        {/* <button type="file"></button> */}
+                        <button type="file"></button>
                     </div>
                     <input onChange={(e) => profileImageUploadHandler(e.target.files[0])} type="file" accept="image/*" />
 

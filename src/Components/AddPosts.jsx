@@ -3,7 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect, useState } from "react"
 import PostComponent from "./PostComponent"
 import { auth } from "../firebase"
-import { ref, getDatabase, push, onValue } from 'firebase/database'
+import { ref, getDatabase, push, onValue, ref as imageRef } from 'firebase/database'
+import { getDownloadURL, uploadBytes } from "firebase/storage"
 // import { ref as postRef, getDatabase as postDatabse, value } from "firebase/database"
 const AddPost = () => {
 
@@ -11,7 +12,10 @@ const AddPost = () => {
     const [postDescription, setPostDescription] = useState('')
     const [postValidation, setPostValidation] = useState({})
     const [postData, setPostData] = useState([])
-    console.log("this is post data", postData)
+    const [postImag, setPostImage] = useState(null)
+
+
+    console.log("this is post image", postData)
 
 
     //read posts data from realtime database
@@ -23,6 +27,7 @@ const AddPost = () => {
         const postRef = ref(postDb, `users/${auth.currentUser.uid}/posts`)
         onValue(postRef, (snapshot) => {
             const data = snapshot.val()
+            console.log('This is data', data)
 
             if (data) {
                 const postArray = Object.entries(data).map(([key, value]) => ({
@@ -30,8 +35,10 @@ const AddPost = () => {
                     id: key,
                     title: value.postTitle,
                     description: value.postDescription,
-                    liks: value.postDescription,
-                    postData: value.postDate
+                    likes: value.likes,
+                    postData: value.postDate,
+                    userProfileName: value.ProfileName
+
                 }))
 
                 postArray.sort((a, b) => b.postData - a.postData)
@@ -57,6 +64,11 @@ const AddPost = () => {
             setPostValidation({})
         } if (Object.entries(err).length == 0) {
 
+            //post image upload
+
+
+            //post image upload
+
 
             // setPost([{ title: postsTitle, description: postDescription }, ...post])
             setPostsTitle("");
@@ -65,11 +77,14 @@ const AddPost = () => {
             try {
                 const db = getDatabase()
                 const postRef = ref(db, `users/${auth.currentUser.uid}/posts`)
+
                 await push(postRef, {
                     postTitle: postsTitle,
                     postDescription: postDescription,
                     likes: 0,
                     comments: [""],
+                    ProfileName: auth.currentUser.displayName || "Anonymous user",
+
                     postDate: Date.now()
                 })
             } catch (err) {
@@ -96,6 +111,7 @@ const AddPost = () => {
                     <p className="text-red-400 text-sm text-left">{postValidation.title}</p>
                     <div>
                         <textarea className="w-full bg-gray-100 rounded-xl pl-5 pt-5 focus:outline-0" value={postDescription} placeholder="Description" rows={4} name="" id="" onChange={(e) => setPostDescription(e.target.value)}></textarea>
+
                         <p className="text-red-400 text-sm text-left">{postValidation.description}</p>
 
                     </div>
@@ -109,8 +125,8 @@ const AddPost = () => {
             </div>
             {
                 postData.map((items) => {
-                    console.log('this is vlue', items)
-                    return <PostComponent key={items.id} title={items.title} description={items.description} />
+
+                    return <PostComponent profile={items.userProfileName} key={items.id} title={items.title} description={items.description} />
                 })
             }
 

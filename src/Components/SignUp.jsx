@@ -3,7 +3,7 @@ import { faLock } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { getDatabase, ref, set } from 'firebase/database'
 import { auth } from "../firebase"
 
@@ -51,7 +51,7 @@ const SignUp = () => {
 
         const userData = { name, email, Password, confirmPassword }
         const error = {}
-        console.log(userData)
+
         Object.entries(userData).forEach(([key, value]) => {
 
             if (validationConfig[key]) {
@@ -91,8 +91,9 @@ const SignUp = () => {
 
                 const response = await createUserWithEmailAndPassword(auth, email, Password)
 
-                console.log(response.user.uid)
-
+                await updateProfile(response.user, {
+                    displayName: name
+                })
                 //save the data to database
                 const db = getDatabase()
                 set(ref(db, "users/" + response.user.uid), {

@@ -2,16 +2,16 @@ import { faCommentDots, faHeart } from "@fortawesome/free-regular-svg-icons"
 import { faShareNodes } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-const PostComponent = ({ title, description, profile }) => {
-    console.log('this is profile,', profile)
+const AllPosts = ({ ProfileName, postTitle, postDescription }) => {
+
     return (
         <>
 
 
             <div className="rounded-lg flex flex-col gap-4 justify-center text-left p-10 pt-10 pb-10 mt-10 bg-white">
-                <span>{profile}</span>
-                <h2 className="font-bold">{title}</h2>
-                <p>{description}</p>
+                <span>{ProfileName}</span>
+                <h2 className="font-bold">{postTitle}</h2>
+                <p>{postDescription}</p>
                 <hr class="h-px  bg-gray-200 border-0 dark:bg-gray-700" />
                 <div className="flex gap-4 items-center">
 
@@ -28,4 +28,4 @@ const PostComponent = ({ title, description, profile }) => {
         </>
     )
 }
-export default PostComponent
+export default AllPosts
