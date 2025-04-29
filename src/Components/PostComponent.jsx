@@ -1,15 +1,22 @@
-import { faCommentDots, faHeart } from "@fortawesome/free-regular-svg-icons"
+import { faCommentDots, faHeart, faUser } from "@fortawesome/free-solid-svg-icons"
 import { faShareNodes } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-const PostComponent = ({ title, description, profile }) => {
-    console.log('this is profile,', profile)
+const PostComponent = ({ title, description, profile, timeAgo, likes }) => {
+
     return (
         <>
 
 
             <div className="rounded-lg flex flex-col gap-4 justify-center text-left p-10 pt-10 pb-10 mt-10 bg-white">
-                <span>{profile}</span>
+                <div className="flex items-center gap-3">
+                    <span className="bg-gray-100 w-10 h-10 flex items-center justify-center rounded-full"><FontAwesomeIcon icon={faUser} /></span>
+                    <div className="flex flex-col">
+
+                        <span className="font-bold">{profile}</span>
+                        <span className="text-sm">{timeAgo}</span>
+                    </div>
+                </div>
                 <h2 className="font-bold">{title}</h2>
                 <p>{description}</p>
                 <hr class="h-px  bg-gray-200 border-0 dark:bg-gray-700" />
@@ -17,7 +24,7 @@ const PostComponent = ({ title, description, profile }) => {
 
                     <div className="flex gap-4 items-center">
 
-                        <p className="cursor-pointer flex gap-2 items-center"><FontAwesomeIcon icon={faHeart} /> 1.2k</p>
+                        <p className="cursor-pointer flex gap-2 items-center"><FontAwesomeIcon icon={faHeart} />{likes}</p>
                         <p className="cursor-pointer flex gap-2 items-center"><FontAwesomeIcon icon={faCommentDots} /> 200</p>
                         <p className="cursor-pointer flex gap-2 items-center"><FontAwesomeIcon icon={faShareNodes} /> 17</p>
                     </div>

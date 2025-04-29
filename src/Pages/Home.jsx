@@ -5,11 +5,12 @@ import AddPost from "../Components/AddPosts"
 import Menu from "../Components/Navbar"
 import { useEffect, useState } from "react"
 import AllPosts from "../Components/AllPosts"
+import moment from "moment"
 
 
 const Home = () => {
     const [posts, setPosts] = useState([])
-    console.log(posts)
+
 
     useEffect(() => {
 
@@ -49,10 +50,13 @@ const Home = () => {
 
                         {
                             Object.entries(posts).map(([key, items]) => {
+                                console.log('iteeeee', items)
                                 return <AllPosts
                                     ProfileName={items.ProfileName}
                                     postTitle={items.postTitle}
-                                    postDescription={items.postDescription} />
+                                    postDescription={items.postDescription}
+                                    timeAgo={moment(items.postDate).fromNow()}
+                                />
 
                             })
                         }

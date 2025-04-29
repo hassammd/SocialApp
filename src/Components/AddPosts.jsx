@@ -5,13 +5,14 @@ import PostComponent from "./PostComponent"
 import { auth } from "../firebase"
 import { ref, getDatabase, push, onValue, ref as imageRef } from 'firebase/database'
 import { getDownloadURL, uploadBytes } from "firebase/storage"
-// import { ref as postRef, getDatabase as postDatabse, value } from "firebase/database"
+import moment from "moment"
+// import { ref as postRef, getDatabase as postDatebse, value } from "firebase/database"
 const AddPost = () => {
 
     const [postsTitle, setPostsTitle] = useState("")
     const [postDescription, setPostDescription] = useState('')
     const [postValidation, setPostValidation] = useState({})
-    const [postData, setPostData] = useState([])
+    const [postData, setpostData] = useState([])
     const [postImag, setPostImage] = useState(null)
 
 
@@ -36,13 +37,14 @@ const AddPost = () => {
                     title: value.postTitle,
                     description: value.postDescription,
                     likes: value.likes,
-                    postData: value.postDate,
+                    postDate: value.postDate,
+                    timeAgo: moment(value.postDate).fromNow(),
                     userProfileName: value.ProfileName
 
                 }))
 
-                postArray.sort((a, b) => b.postData - a.postData)
-                setPostData(postArray)
+                postArray.sort((a, b) => b.postDate - a.postDate)
+                setpostData(postArray)
             }
         })
     }, [])
@@ -126,7 +128,7 @@ const AddPost = () => {
             {
                 postData.map((items) => {
 
-                    return <PostComponent profile={items.userProfileName} key={items.id} title={items.title} description={items.description} />
+                    return <PostComponent likes={items.likes} timeAgo={items.timeAgo} postDate={items.postDate} profile={items.userProfileName} key={items.id} title={items.title} description={items.description} />
                 })
             }
 
