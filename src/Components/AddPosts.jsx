@@ -125,12 +125,10 @@ const AddPost = () => {
                 <hr class="h-px  bg-gray-200 border-0 dark:bg-gray-700" />
 
             </div>
-            {
-                postData.map((items) => {
 
-                    return <PostComponent likes={items.likes} timeAgo={items.timeAgo} postDate={items.postDate} profile={items.userProfileName} key={items.id} title={items.title} description={items.description} />
-                })
-            }
+
+            <PostComponent postData={postData} />
+
 
         </>
     )

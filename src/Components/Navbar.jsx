@@ -30,7 +30,7 @@ const Navbar = () => {
     return (
         <>
 
-            <ul className="flex flex-col justify-left items-start gap-2 sticky top-30 color-red-100">
+            <ul className=" flex flex-col justify-left items-start gap-2 sticky top-30 color-red-100">
                 <li><Link className="flex items-center gap-2 justify-center" to={'/home'}><span><FontAwesomeIcon icon={faHouse} /></span> Home</Link></li>
                 <li><Link className="flex items-center gap-2 justify-center"><FontAwesomeIcon icon={faUserGroup} />Friends</Link></li>
                 <li><Link className="flex items-center gap-2 justify-center"><FontAwesomeIcon icon={faPeopleGroup} />Groups</Link></li>

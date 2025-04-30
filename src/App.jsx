@@ -24,9 +24,9 @@ function App() {
 
 
         <Route element={<ProtectedRoute />}>
-
           <Route element={<RouteLayout />}>
             <Route path='/home' element={<Home />} />
+            <Route path='/:id' element={<Profile />} />
             <Route path='/profile' element={<Profile />} />
           </Route>
         </Route>

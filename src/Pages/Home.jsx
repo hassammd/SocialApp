@@ -6,10 +6,14 @@ import Menu from "../Components/Navbar"
 import { useEffect, useState } from "react"
 import AllPosts from "../Components/AllPosts"
 import moment from "moment"
+import { useParams } from "react-router-dom"
 
 
 const Home = () => {
     const [posts, setPosts] = useState([])
+    const parms = useParams()
+    console.log('this is useParms', parms)
+
 
 
     useEffect(() => {
@@ -18,7 +22,7 @@ const Home = () => {
         const useRef = ref(db, 'users')
         onValue(useRef, (snapshot) => {
             const usersData = snapshot.val()
-            console.log("these are all users", usersData)
+
             const allPosts = []
 
             if (usersData) {
@@ -26,7 +30,7 @@ const Home = () => {
                     const usrPost = value.posts
                     const newPost = Object.entries(usrPost)
                     newPost.forEach(([key, value]) => {
-                        console.log(value)
+
                         allPosts.push(value)
                     })
 
@@ -50,7 +54,7 @@ const Home = () => {
 
                         {
                             Object.entries(posts).map(([key, items]) => {
-                                console.log('iteeeee', items)
+
                                 return <AllPosts
                                     ProfileName={items.ProfileName}
                                     postTitle={items.postTitle}

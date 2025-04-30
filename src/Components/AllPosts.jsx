@@ -2,10 +2,13 @@ import { faCommentDots, faHeart, faUser } from "@fortawesome/free-solid-svg-icon
 import { faHeartBroken, faShareNodes } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect } from "react"
+import { auth } from "../firebase"
+import { getAuth } from "firebase/auth"
 
 const AllPosts = ({ ProfileName, postTitle, postDescription, timeAgo }) => {
 
-
+    const auuth = getAuth
+    // console.log('this is outh', auth.currentUser)
 
     return (
         <>
