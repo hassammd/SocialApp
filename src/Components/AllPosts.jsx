@@ -34,7 +34,10 @@ const AllPosts = ({ ProfileName, postTitle, postDescription, timeAgo }) => {
         <>
 
 
-            <div className="rounded-lg flex flex-col gap-4 justify-center text-left p-10 pt-10 pb-10 mt-10 bg-white">
+
+
+
+            <div className="rounded-lg flex flex-col gap-4 justify-center text-left mb-10 p-10 pt-10 pb-10 bg-white">
                 <div className="flex gap-2 items-center">
                     <p className="bg-gray-100 w-10 h-10 flex items-center justify-center rounded-full">  <span><FontAwesomeIcon icon={faUser} /></span></p>
                     <div className="flex flex-col">

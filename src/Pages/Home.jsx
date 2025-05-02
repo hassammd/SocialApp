@@ -47,10 +47,10 @@ const Home = () => {
     return (
         <>
             <main className="bg-blue-50 pt-5">
-                <div className="grid grid-cols-3">
-                    <div className="flex items-start justify-center sticky top-0"><Menu /></div>
+                <div className="flex gap-6 justify-center">
+                    <div className="flex  items-start justify-center sticky top-0 col-span-1 w-[20%]   "><Menu /></div>
 
-                    <div>
+                    <div className="w-[50%]">
 
                         {
                             Object.entries(posts).map(([key, items]) => {
@@ -66,6 +66,11 @@ const Home = () => {
                             })
                         }
 
+                    </div>
+                    <div className="w-[20%]">
+                        <div className="bg-white p-10 sticky top-28 rounded-lg">
+                            <h3>Other Users</h3>
+                        </div>
                     </div>
                 </div>
 

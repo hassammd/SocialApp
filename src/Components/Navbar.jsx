@@ -29,16 +29,18 @@ const Navbar = () => {
 
     return (
         <>
+            <div className="bg-white p-10 sticky top-28 w-full rounded-lg">
 
-            <ul className=" flex flex-col justify-left items-start gap-2 sticky top-30 color-red-100">
-                <li><Link className="flex items-center gap-2 justify-center" to={'/home'}><span><FontAwesomeIcon icon={faHouse} /></span> Home</Link></li>
-                <li><Link className="flex items-center gap-2 justify-center"><FontAwesomeIcon icon={faUserGroup} />Friends</Link></li>
-                <li><Link className="flex items-center gap-2 justify-center"><FontAwesomeIcon icon={faPeopleGroup} />Groups</Link></li>
-                <li><Link className="flex items-center gap-2 justify-center"><FontAwesomeIcon icon={faCartPlus} />Marketplace</Link></li>
-                <li><Link className="flex items-center gap-2 justify-center"><FontAwesomeIcon icon={faFlag} />Pages</Link></li>
-                <li><Link onClick={logoutHandler} className="flex items-center gap-2 justify-center"><FontAwesomeIcon icon={faRightFromBracket} />Logout</Link></li>
+                <ul className=" flex flex-col justify-left items-start gap-2 sticky top-30 color-red-100">
+                    <li><Link className="flex items-center gap-2 justify-center" to={'/home'}><span><FontAwesomeIcon icon={faHouse} /></span> Home</Link></li>
+                    <li><Link className="flex items-center gap-2 justify-center"><FontAwesomeIcon icon={faUserGroup} />Friends</Link></li>
+                    <li><Link className="flex items-center gap-2 justify-center"><FontAwesomeIcon icon={faPeopleGroup} />Groups</Link></li>
+                    <li><Link className="flex items-center gap-2 justify-center"><FontAwesomeIcon icon={faCartPlus} />Marketplace</Link></li>
+                    <li><Link className="flex items-center gap-2 justify-center"><FontAwesomeIcon icon={faFlag} />Pages</Link></li>
+                    <li><Link onClick={logoutHandler} className="flex items-center gap-2 justify-center"><FontAwesomeIcon icon={faRightFromBracket} />Logout</Link></li>
 
-            </ul>
+                </ul>
+            </div>
 
         </>
     )
