@@ -5,7 +5,7 @@ const Header = () => {
     const navigate = useNavigate('')
     return (
         <>
-            <header className="sticky top-0 z-10 bg-white rounded-t-[2vw]  flex gap-3 justify-between items-center pl-10 pr-10 pt-7 pb-7">
+            <header className="shadow-[0_3px_10px_rgb(0,0,0,0.2)] sticky top-0 z-10 bg-white rounded-t-[2vw]  flex gap-3 justify-between items-center pl-10 pr-10 pt-7 pb-7">
 
                 <div>
                     <div className="cursor-pointer" onClick={() => navigate('/home')}>LOGO</div>

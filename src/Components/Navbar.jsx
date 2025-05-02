@@ -29,7 +29,7 @@ const Navbar = () => {
 
     return (
         <>
-            <div className="bg-white p-10 sticky top-28 w-full rounded-lg">
+            <div className="bg-white p-10 sticky top-28 w-full rounded-lg shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
 
                 <ul className=" flex flex-col justify-left items-start gap-2 sticky top-30 color-red-100">
                     <li><Link className="flex items-center gap-2 justify-center" to={'/home'}><span><FontAwesomeIcon icon={faHouse} /></span> Home</Link></li>

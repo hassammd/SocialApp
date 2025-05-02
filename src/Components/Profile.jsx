@@ -69,7 +69,7 @@ const Profile = () => {
                     });
             }
         }
-    }, [parms, navigate]);
+    }, [parms]);
 
     return (
         <>
