@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const PostComponent = ({ postData }) => {
 
+    console.log('This is post data', postData)
+
 
     return (
         <>
@@ -17,7 +19,7 @@ const PostComponent = ({ postData }) => {
                             <span className="bg-gray-100 w-10 h-10 flex items-center justify-center rounded-full"><FontAwesomeIcon icon={faUser} /></span>
                             <div className="flex flex-col">
 
-                                <span className="font-bold">{items.profile}</span>
+                                <span className="font-bold">{items.userProfileName}</span>
                                 <span className="text-sm">{items.timeAgo}</span>
                             </div>
                         </div>

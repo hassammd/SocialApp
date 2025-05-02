@@ -1,14 +1,34 @@
 import { faCommentDots, faHeart, faUser } from "@fortawesome/free-solid-svg-icons"
 import { faHeartBroken, faShareNodes } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { auth } from "../firebase"
 import { getAuth } from "firebase/auth"
+import { getDatabase, ref } from "firebase/database"
 
 const AllPosts = ({ ProfileName, postTitle, postDescription, timeAgo }) => {
 
-    const auuth = getAuth
-    // console.log('this is outh', auth.currentUser)
+    const [comments, setComments] = useState('')
+    const [allComments, setAllComments] = useState([])
+
+
+
+    const commentHandler = (e) => {
+        e.preventDefault()
+        if (comments.trim() !== "") {
+
+            setAllComments([...allComments, comments])
+            console.log('all comment added', allComments)
+        }
+
+    }
+
+    useEffect(() => {
+
+        const db = getDatabase()
+
+
+    })
 
     return (
         <>
@@ -35,7 +55,13 @@ const AllPosts = ({ ProfileName, postTitle, postDescription, timeAgo }) => {
                         <p className="cursor-pointer flex gap-2 items-center"><FontAwesomeIcon icon={faCommentDots} /> 200</p>
                         <p className="cursor-pointer flex gap-2 items-center"><FontAwesomeIcon icon={faShareNodes} /> 17</p>
                     </div>
-                    <input className="w-full h-8 bg-gray-100 rounded-full pl-5 focus:outline-0" type="text" placeholder="Write your comment" />
+                </div>
+                <div className="flex items-center">
+                    <form className="flex items-center gap-2" action="" onSubmit={commentHandler}>
+
+                        <input onChange={(e) => setComments(e.target.value)} className="w-full h-8 bg-gray-100 rounded-full pl-5 focus:outline-0" type="text" placeholder="Write your comment" />
+                        <button className="bg-gray-100 pt-1 pl-4 pr-4 pb-1">add</button>
+                    </form>
                 </div>
             </div>
 

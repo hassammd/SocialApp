@@ -35,7 +35,7 @@ const Login = () => {
                 navigate('/profile')
             } else {
                 navigate('/')
-                console.log('user is not logedin')
+              
 
             }
 
@@ -47,7 +47,7 @@ const Login = () => {
     const singInWithGoogle = () => {
 
         signInWithPopup(auth, googleProvider).then((res) => {
-            console.log(res)
+        
         }).catch((err) => console.log(err))
     }
 
@@ -69,7 +69,7 @@ const Login = () => {
 
                     if (rule.required && !value) {
                         error[key] = rule.message
-                        console.log(error)
+                  
                     } if (Object.entries(error).length > 0) {
                         setLoginError(error)
                     }
@@ -86,7 +86,7 @@ const Login = () => {
                 console.log('login successfully')
                 navigate('/profile')
             } catch (error) {
-                console.log(error.code)
+           
                 switch (error.code) {
                     case 'auth/invalid-email':
                         setFirebaseLoginErr('Invalid email format');

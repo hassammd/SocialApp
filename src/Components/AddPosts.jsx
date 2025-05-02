@@ -16,7 +16,6 @@ const AddPost = () => {
     const [postImag, setPostImage] = useState(null)
 
 
-    console.log("this is post image", postData)
 
 
     //read posts data from realtime database

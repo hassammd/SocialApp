@@ -12,7 +12,7 @@ import { useParams } from "react-router-dom"
 const Home = () => {
     const [posts, setPosts] = useState([])
     const parms = useParams()
-    console.log('this is useParms', parms)
+
 
 
 
@@ -56,6 +56,7 @@ const Home = () => {
                             Object.entries(posts).map(([key, items]) => {
 
                                 return <AllPosts
+                                    key={key}
                                     ProfileName={items.ProfileName}
                                     postTitle={items.postTitle}
                                     postDescription={items.postDescription}
