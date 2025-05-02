@@ -24,6 +24,7 @@ a:hover {
 
 body {
   margin: 0;
+  position: relative;
   background-color: #F2F2F2;
   
 }

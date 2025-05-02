@@ -5,10 +5,14 @@ import { auth } from "../firebase";
 import { getStorage, ref as filestoregeRef, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useNavigate, useParams } from "react-router-dom";
 import PostComponent from "./PostComponent";
+import SettingPopup from "./SettingPopup";
+import { faGear } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Profile = () => {
     const parms = useParams();
     const navigate = useNavigate();
+    const [settingPopup, setSettingPopup] = useState(false)
 
     const [profileData, setProfileData] = useState({});
 
@@ -71,9 +75,25 @@ const Profile = () => {
         }
     }, [parms]);
 
+
+    //Profile Setting Handler
+
+    const profileSettingHandler = (e) => {
+        e.preventDefault()
+        setSettingPopup(!settingPopup)
+
+    }
+
+    //Profile Setting Handler
+
+
     return (
         <>
+
             <div className="bg-white">
+                {
+                    settingPopup ? <SettingPopup profileData={profileData} /> : null
+                }
                 <div className="bg-gray-200 h-70 flex items-center justify-center relative">
                     <h2>User Profile</h2>
                 </div>
@@ -102,6 +122,10 @@ const Profile = () => {
                             <p className="text-sm">following</p>
                         </div>
                     </div>
+                    <div className="text-right">
+
+                        <span className="cursor-pointer" onClick={profileSettingHandler}><FontAwesomeIcon icon={faGear} /></span>
+                    </div>
                 </div>
             </div>
 
@@ -112,7 +136,7 @@ const Profile = () => {
                 </div>
             }
 
-            {/* <PostComponent profileData={profileData} /> */}
+
         </>
     );
 };
