@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const PostComponent = ({ postData }) => {
 
-    console.log('This is post data', postData)
 
 
     return (

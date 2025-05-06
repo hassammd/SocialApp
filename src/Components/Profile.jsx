@@ -4,7 +4,6 @@ import { getDatabase, ref, get, update } from "firebase/database";
 import { auth } from "../firebase";
 import { getStorage, ref as filestoregeRef, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useNavigate, useParams } from "react-router-dom";
-import PostComponent from "./PostComponent";
 import SettingPopup from "./SettingPopup";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,6 +14,7 @@ const Profile = () => {
     const [settingPopup, setSettingPopup] = useState(false)
 
     const [profileData, setProfileData] = useState({});
+    console.log('this is porfile data', profileData)
 
     const profileImageUploadHandler = async (file) => {
         if (!file) return;
@@ -76,7 +76,7 @@ const Profile = () => {
     }, [parms]);
 
 
-    //Profile Setting Handler
+    //Profile Updated Handler
 
     const profileSettingHandler = (e) => {
         e.preventDefault()
@@ -84,7 +84,7 @@ const Profile = () => {
 
     }
 
-    //Profile Setting Handler
+    //Profile Updated Handler
 
 
     return (
@@ -92,7 +92,7 @@ const Profile = () => {
 
             <div className="bg-white">
                 {
-                    settingPopup ? <SettingPopup profileData={profileData} /> : null
+                    settingPopup ? <SettingPopup profileData={profileData} onClose={profileSettingHandler} /> : null
                 }
                 <div className="bg-gray-200 h-70 flex items-center justify-center relative">
                     <h2>User Profile</h2>
@@ -109,7 +109,7 @@ const Profile = () => {
 
                     <div className="flex flex-col items-start">
                         <h2 className="font-bold">{profileData.name}</h2>
-                        <span>@username</span>
+                        <span>@{profileData.username}</span>
                         <p>{profileData.bio}</p>
                     </div>
                     <div className="flex gap-2 items-center">

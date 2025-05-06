@@ -13,9 +13,7 @@ const AddPost = () => {
     const [postDescription, setPostDescription] = useState('')
     const [postValidation, setPostValidation] = useState({})
     const [postData, setpostData] = useState([])
-    const [postImag, setPostImage] = useState(null)
-
-
+    const [userUpdatedName, setuserUpdatedName] = useState()
 
 
     //read posts data from realtime database
@@ -25,6 +23,13 @@ const AddPost = () => {
 
         const postDb = getDatabase()
         const postRef = ref(postDb, `users/${auth.currentUser.uid}/posts`)
+        const userRef = ref(postDb, `users/${auth.currentUser.uid}`)
+        const UpdatedData = onValue(userRef, (snpahsot) => {
+            const userInfo = snpahsot.val()
+            const updatedName = userInfo.name
+            setuserUpdatedName(updatedName)
+
+        })
         onValue(postRef, (snapshot) => {
             const data = snapshot.val()
             console.log('This is data', data)
@@ -38,7 +43,7 @@ const AddPost = () => {
                     likes: value.likes,
                     postDate: value.postDate,
                     timeAgo: moment(value.postDate).fromNow(),
-                    userProfileName: value.ProfileName
+                    userProfileName: userUpdatedName
 
                 }))
 
@@ -46,7 +51,7 @@ const AddPost = () => {
                 setpostData(postArray)
             }
         })
-    }, [])
+    }, [userUpdatedName])
 
 
 
@@ -79,13 +84,14 @@ const AddPost = () => {
                 const db = getDatabase()
                 const postRef = ref(db, `users/${auth.currentUser.uid}/posts`)
 
+
+                console.log('this is user info', userInfo)
                 await push(postRef, {
                     postTitle: postsTitle,
                     postDescription: postDescription,
                     likes: 0,
                     comments: [""],
                     ProfileName: auth.currentUser.displayName || "Anonymous user",
-
                     postDate: Date.now()
                 })
             } catch (err) {

@@ -99,6 +99,7 @@ const SignUp = () => {
                 set(ref(db, "users/" + response.user.uid), {
                     name: name,
                     bio: 'A rendom user from rendom place',
+                    username: '',
                     followers: 0,
                     following: 0,
                     tweets: {}

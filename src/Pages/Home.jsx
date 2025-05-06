@@ -12,8 +12,8 @@ import { useParams } from "react-router-dom"
 const Home = () => {
     const [posts, setPosts] = useState([])
     const [alluserName, setAllUserName] = useState([])
-    const parms = useParams()
-    console.log('all userName', alluserName)
+
+
 
 
 
@@ -24,7 +24,6 @@ const Home = () => {
         const useRef = ref(db, 'users')
         onValue(useRef, (snapshot) => {
             const usersData = snapshot.val()
-            console.log('this is user Data,', usersData)
 
             const allPosts = []
             const allusers = []
@@ -32,22 +31,23 @@ const Home = () => {
             if (usersData) {
                 Object.entries(usersData).forEach(([key, value]) => {
                     const usrPost = value.posts
+
                     //getging user
                     const userName = value.name
                     if (value.name) {
-                        allusers.push(value.name)
+                        allusers.push(userName)
                     }
                     //getging user
-                    const newPost = Object.entries(usrPost)
-                    newPost.forEach(([key, value]) => {
+                    // const newPost = Object.entries(usrPost)
+                    Object.entries(usrPost).forEach(([key, value]) => {
 
-                        allPosts.push(value)
+                        allPosts.push({ ...value, ProfileName: userName })
                     })
 
 
+                    setPosts(allPosts)
+                    setAllUserName(allusers)
                 })
-                setPosts(allPosts)
-                setAllUserName(allusers)
             }
         })
 
@@ -88,7 +88,7 @@ const Home = () => {
 
                                             <div className="flex gap-2 flex-row items-center ">
                                                 <div className="bg-gray-200 w-10 h-10 rounded-full"></div>
-                                                <p>{items}</p>
+                                                <p className="text-sm">{items}</p>
 
                                             </div>
                                         )
