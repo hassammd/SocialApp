@@ -4,8 +4,9 @@ import { useEffect, useState } from "react"
 import PostComponent from "./PostComponent"
 import { auth } from "../firebase"
 import { ref, getDatabase, push, onValue, ref as imageRef } from 'firebase/database'
-import { getDownloadURL, uploadBytes } from "firebase/storage"
+
 import moment from "moment"
+import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons"
 // import { ref as postRef, getDatabase as postDatebse, value } from "firebase/database"
 const AddPost = () => {
 
@@ -13,7 +14,7 @@ const AddPost = () => {
     const [postDescription, setPostDescription] = useState('')
     const [postValidation, setPostValidation] = useState({})
     const [postData, setpostData] = useState([])
-    const [userUpdatedName, setuserUpdatedName] = useState()
+    const [userUpdatedName, setUserUpdatedName] = useState()
 
 
     //read posts data from realtime database
@@ -22,14 +23,15 @@ const AddPost = () => {
 
 
         const postDb = getDatabase()
-        const postRef = ref(postDb, `users/${auth.currentUser.uid}/posts`)
         const userRef = ref(postDb, `users/${auth.currentUser.uid}`)
         const UpdatedData = onValue(userRef, (snpahsot) => {
             const userInfo = snpahsot.val()
             const updatedName = userInfo.name
-            setuserUpdatedName(updatedName)
+            setUserUpdatedName(updatedName)
 
         })
+        const postRef = ref(postDb, `users/${auth.currentUser.uid}/posts`)
+
         onValue(postRef, (snapshot) => {
             const data = snapshot.val()
             console.log('This is data', data)
@@ -43,7 +45,7 @@ const AddPost = () => {
                     likes: value.likes,
                     postDate: value.postDate,
                     timeAgo: moment(value.postDate).fromNow(),
-                    userProfileName: userUpdatedName
+                    userProfileName: userUpdatedName || "Anonymous user"
 
                 }))
 
@@ -85,7 +87,6 @@ const AddPost = () => {
                 const postRef = ref(db, `users/${auth.currentUser.uid}/posts`)
 
 
-                console.log('this is user info', userInfo)
                 await push(postRef, {
                     postTitle: postsTitle,
                     postDescription: postDescription,
@@ -106,6 +107,7 @@ const AddPost = () => {
 
         <>
             <div className="md:w-full rounded-lg bg-white flex flex-col gap-4 justify-center p-10 pt-10 pb-10">
+
                 <form className="flex flex-col gap-4" action="" onSubmit={postHandler}>
 
                     <div className=" flex justify-left gap-3 ">
@@ -130,6 +132,7 @@ const AddPost = () => {
                 <hr class="h-px  bg-gray-200 border-0 dark:bg-gray-700" />
 
             </div>
+
 
 
             <PostComponent postData={postData} />

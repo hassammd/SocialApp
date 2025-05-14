@@ -33,7 +33,7 @@ const SettingPopup = ({ profileData, onClose }) => {
     }
 
     return (
-        <div className="bg-red-100 w-100 p-10 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40 rounded shadow-md">
+        <div className="bg-blue-50 w-100 p-10 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40 rounded shadow-md">
             <div className="relative w-full flex flex-col items-center justify-center">
                 <form className="w-full flex flex-col gap-3" onSubmit={profileSettingHandler}>
                     <input

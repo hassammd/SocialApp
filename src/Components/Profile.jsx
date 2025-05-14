@@ -5,14 +5,13 @@ import { auth } from "../firebase";
 import { getStorage, ref as filestoregeRef, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useNavigate, useParams } from "react-router-dom";
 import SettingPopup from "./SettingPopup";
-import { faGear } from "@fortawesome/free-solid-svg-icons";
+import { faGear, faPencil } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Profile = () => {
     const parms = useParams();
     const navigate = useNavigate();
     const [settingPopup, setSettingPopup] = useState(false)
-
     const [profileData, setProfileData] = useState({});
     console.log('this is porfile data', profileData)
 
@@ -122,9 +121,9 @@ const Profile = () => {
                             <p className="text-sm">following</p>
                         </div>
                     </div>
-                    <div className="text-right">
+                    <div className="text-right absolute top-20   right-6">
 
-                        <span className="cursor-pointer" onClick={profileSettingHandler}><FontAwesomeIcon icon={faGear} /></span>
+                        <span className="cursor-pointer" onClick={profileSettingHandler}><FontAwesomeIcon icon={faPencil} /></span>
                     </div>
                 </div>
             </div>
